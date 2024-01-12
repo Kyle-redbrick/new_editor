@@ -4,16 +4,16 @@ import Editor from "./Editor";
 import "./index.scss";
 
 function View(props) {
-  const { editorType, onChangeEditorType } = props;
+  const { editorType, onChangeSelectedElement } = props;
   return (
     <div className="makersEditor">
       <section>
-        <ProjectList onChangeEditorType={onChangeEditorType} />
+        <ProjectList onChangeSelectedElement={onChangeSelectedElement} />
       </section>
       <section>
         <Editor
           editorType={editorType}
-          onChangeEditorType={onChangeEditorType}
+          onChangeSelectedElement={onChangeSelectedElement}
         />
       </section>
     </div>
