@@ -1,11 +1,21 @@
 import React from "react";
+import ProjectList from "./ProjectList";
+import Editor from "./Editor";
 import "./index.scss";
 
-function View() {
+function View(props) {
+  const { editorType, onChangeEditorType } = props;
   return (
     <div className="makersEditor">
-      <section>SNB</section>
-      <section>CONTENT</section>
+      <section>
+        <ProjectList />
+      </section>
+      <section>
+        <Editor
+          editorType={editorType}
+          onChangeEditorType={onChangeEditorType}
+        />
+      </section>
     </div>
   );
 }

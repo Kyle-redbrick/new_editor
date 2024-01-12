@@ -1,0 +1,100 @@
+.makersEditor-Editor-body-fields__section {
+  .makersEditor-Editor-body-fields__section-title {
+    margin-bottom: 2px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 200%;
+  }
+
+  .makersEditor-Editor-body-fields__section-body__input {
+    max-width: 800px;
+    width: 100%;
+    > input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--Gray-200, #e4e7ec);
+      font-family: Pretendard;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+    }
+  }
+
+  .makersEditor-Editor-body-fields__section-body__textarea {
+    max-width: 800px;
+    width: 100%;
+    > textarea {
+      width: 100%;
+      height: 150px;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--Gray-200, #e4e7ec);
+      font-family: Pretendard;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 24px;
+      resize: none;
+    }
+  }
+
+  .makersEditor-Editor-body-fields__section-body__onoff {
+    .onoff-wrapper {
+      width: 70px;
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+    }
+    .onoff-wrapper-off {
+      width: 85px;
+    }
+
+    .onoff {
+      width: 28px;
+      height: 15px;
+    }
+    .onoff_background {
+      display: flex;
+      padding: 3px;
+      width: 100%;
+      height: 15px;
+      background-color: #ccc;
+      border-radius: 15px;
+      cursor: pointer;
+    }
+    .onoff_thumb {
+      margin: auto 0;
+      width: 15px;
+      height: 15px;
+      background-color: white;
+      border-radius: 15px;
+    }
+    .onoff-on {
+      .onoff_background {
+        background-color: #fa323c;
+      }
+      .onoff_thumb {
+        margin-left: auto;
+      }
+    }
+  }
+
+  button {
+    padding: 8px 24px;
+    border: none;
+    border-radius: 16px;
+    color: white;
+    background-color: #000;
+    outline: none;
+    font-weight: bold;
+    line-height: 24px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+    }
+    &:disabled {
+      opacity: 0.1;
+      pointer-events: none;
+    }
+  }
+}

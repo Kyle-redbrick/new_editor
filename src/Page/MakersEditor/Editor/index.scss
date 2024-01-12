@@ -1,0 +1,23 @@
+.makersEditor-Editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .makersEditor-Editor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 16px 32px;
+    border-bottom: 1px solid var(--Gray-200, #e4e7ec);
+
+    .makersEditor-Editor-header__title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+
+  .makersEditor-Editor-body {
+    padding: 32px;
+  }
+}

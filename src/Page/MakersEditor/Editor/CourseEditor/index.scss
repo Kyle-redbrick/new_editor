@@ -1,0 +1,21 @@
+.makersEditor-Editor-body-fields {
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 24px;
+}
+
+.makersEditor-Editor-body__horizontal {
+  width: 100%;
+  max-width: 825px;
+  height: 1px;
+  background-color: #e4e7ec;
+}
+
+.makersEditor-Editor-body__delete {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  color: #667085;
+  cursor: pointer;
+}
