@@ -8,7 +8,7 @@ function View(props) {
   return (
     <div className="makersEditor">
       <section>
-        <ProjectList />
+        <ProjectList onChangeEditorType={onChangeEditorType} />
       </section>
       <section>
         <Editor

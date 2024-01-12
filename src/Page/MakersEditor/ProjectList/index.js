@@ -1,8 +1,9 @@
 import React from "react";
-import "./index.scss";
 import BtnCourseAdd from "../../../Image/btn-course_add.svg";
+import "./index.scss";
 
-export default function ProjectList() {
+export default function ProjectList(props) {
+  const { onChangeEditorType } = props;
   return (
     <div className="makersEditor-ProjectList">
       <div className="makersEditor-ProjectList-header">
@@ -11,6 +12,7 @@ export default function ProjectList() {
         </div>
         <img src={BtnCourseAdd} alt="add" />
       </div>
+      <div className="makersEditor-ProjectList-body">body</div>
     </div>
   );
 }

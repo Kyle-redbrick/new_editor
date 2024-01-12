@@ -1,6 +1,11 @@
 import React from "react";
+import UserInfo from "../../Common/Component/UserInfo";
 import Container from "./Container";
 
 export default function MakersEditor() {
-  return <Container />;
+  return (
+    <UserInfo>
+      <Container />;
+    </UserInfo>
+  );
 }
