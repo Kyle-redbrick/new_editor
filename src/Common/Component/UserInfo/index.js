@@ -4,7 +4,8 @@ import * as request from "../../Util/HTTPRequest";
 export default function UserInfo({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const getMakersToken = () =>
-    new URLSearchParams(window.location.search).get("makersToken");
+    new URLSearchParams(window.location.search).get("makersToken") ||
+    localStorage.getItem("makersToken");
 
   useEffect(() => {
     const makersToken = getMakersToken();
