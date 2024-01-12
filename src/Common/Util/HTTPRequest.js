@@ -27,3 +27,11 @@ export const fetchSaasRequest = (url, method, param) => {
 export const getUserInfo = () => {
   return fetchSaasRequest(URL.API_SAAS_SERVER + "user/info", "GET");
 };
+
+export const getSaasAllCourse = () => {
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER +
+      "course/list/available?offset=0&limit=100&classification=created",
+    "GET"
+  );
+};

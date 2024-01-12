@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import * as request from "../../Util/HTTPRequest";
 
 export default function UserInfo({ children }) {
+  const [isLoading, setIsLoading] = useState(false);
   const getMakersToken = () =>
     new URLSearchParams(window.location.search).get("makersToken");
 
@@ -20,6 +21,7 @@ export default function UserInfo({ children }) {
               "userInfo",
               JSON.stringify(json.data.userInfo)
             );
+            setIsLoading(true);
           });
       };
       userInfo();
@@ -35,5 +37,5 @@ export default function UserInfo({ children }) {
 
     window.history.replaceState({}, null, newUrl);
   }, []);
-  return <React.Fragment>{children}</React.Fragment>;
+  return <React.Fragment>{isLoading && children}</React.Fragment>;
 }
