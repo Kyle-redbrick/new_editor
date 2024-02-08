@@ -19,3 +19,30 @@
   color: #667085;
   cursor: pointer;
 }
+
+.makersEditor-Editor-body-footer {
+  display: flex;
+  flex-direction: row-reverse;
+  border-top: 1px solid var(--Gray-200, #e4e7ec);
+  padding-top: 10px;
+  margin-top: 30px;
+
+  > button {
+    padding: 8px 32px;
+    border: none;
+    border-radius: 16px;
+    color: white;
+    background-color: #fa323c;
+    outline: none;
+    font-weight: bold;
+    line-height: 24px;
+    cursor: pointer;
+    &:hover {
+      opacity: 0.6;
+    }
+    &:disabled {
+      opacity: 0.1;
+      pointer-events: none;
+    }
+  }
+}

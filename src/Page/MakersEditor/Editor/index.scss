@@ -1,5 +1,6 @@
 .makersEditor-Editor {
   display: flex;
+  // justify-content: space-between;
   flex-direction: column;
   height: 100%;
 
@@ -19,5 +20,33 @@
 
   .makersEditor-Editor-body {
     padding: 32px;
+    padding-bottom: 0;
+    flex: 1;
+  }
+
+  .makersEditor-Editor-footer {
+    display: flex;
+    flex-direction: row-reverse;
+    border-top: 1px solid var(--Gray-200, #e4e7ec);
+    padding: 10px 0;
+
+    > button {
+      padding: 8px 32px;
+      border: none;
+      border-radius: 16px;
+      color: white;
+      background-color: #fa323c;
+      outline: none;
+      font-weight: bold;
+      line-height: 24px;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.6;
+      }
+      &:disabled {
+        opacity: 0.1;
+        pointer-events: none;
+      }
+    }
   }
 }

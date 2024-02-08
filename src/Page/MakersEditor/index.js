@@ -5,7 +5,7 @@ import Container from "./Container";
 export default function MakersEditor() {
   return (
     <UserInfo>
-      <Container />;
+      <Container />
     </UserInfo>
   );
 }

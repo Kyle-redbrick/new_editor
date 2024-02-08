@@ -38,6 +38,20 @@
     }
   }
 
+  .makersEditor-Editor-body-fields__section-body__file {
+    display: flex;
+    align-items: flex-end;
+
+    img {
+      margin-right: 10px;
+      width: 100px;
+    }
+
+    button {
+      height: 40px;
+    }
+  }
+
   .makersEditor-Editor-body-fields__section-body__onoff {
     .onoff-wrapper {
       width: 70px;
@@ -97,4 +111,8 @@
       pointer-events: none;
     }
   }
+}
+
+img {
+  max-width: 200px;
 }

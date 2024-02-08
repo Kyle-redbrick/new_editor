@@ -1,6 +1,6 @@
 import { URL } from "../../Util/Constant";
 
-if (!String.prototype.THUMBNAIL_ALI) {
+if (!String.prototype.GET_IMAGE) {
   String.prototype.GET_IMAGE = function () {
     if (this.startsWith("http")) {
       return this;

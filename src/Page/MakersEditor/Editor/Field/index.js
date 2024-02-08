@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import * as request from "../../../../Common/Util/HTTPRequest";
 import "./index.scss";
 
 function Base(props) {
@@ -50,21 +51,41 @@ function Textarea(props) {
 }
 
 function File(props) {
-  const { id, value, onChange } = props;
+  const { id, value, onChange, courseId } = props;
   const fileInputRef = useRef();
+  // let downloadUrl;
   return (
     <Base {...props} type="file">
       <input
         type="file"
         ref={fileInputRef}
         accept=".jpg, .jpeg, .png, .gif, .mp4"
-        onChange={(e) => {
+        onChange={async (e) => {
           const selectedFile = e.target.files[0];
           if (!selectedFile) return;
-          //   uploadFile({ selectedFile }).then((res) => onChange(res));
+
+          const uploadResponse = await request.courseThumbnailUpload(courseId);
+          const uploadData = await uploadResponse.json();
+          const putUrl = uploadData.url.uploadUrl;
+          const downloadUrl = uploadData.url.downloadUrl;
+          const putResponse = await fetch(putUrl, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "image/jpeg",
+            },
+            body: selectedFile,
+          });
+          console.log("PUT response", putResponse);
+          onChange(downloadUrl);
         }}
         hidden
       />
+      {value && (
+        <span>
+          <img src={process.env.REACT_APP_GET_IMAGE + value} alt={value} />
+          {/* {value} */}
+        </span>
+      )}
       <button
         onClick={() => {
           fileInputRef.current.click();
@@ -72,11 +93,6 @@ function File(props) {
       >
         업로드
       </button>
-      {value && (
-        <span>
-          {value} <img src={value.GET_IMAGE()} alt={value} />
-        </span>
-      )}
     </Base>
   );
 }
