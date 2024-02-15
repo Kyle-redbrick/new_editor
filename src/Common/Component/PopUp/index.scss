@@ -1,0 +1,33 @@
+.PopUp-container {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  height: 140px;
+  background-color: white;
+  box-shadow: 0px 24px 48px 0px rgba(0, 0, 0, 0.2),
+    0px 3px 6px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+
+  .PopUp-container-body {
+    flex: 0.6;
+    padding: 22px 24px;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(60, 60, 67, 0.6);
+    white-space: pre-line;
+    line-height: 24px;
+  }
+
+  .PopUp-container-footer {
+    flex: 0.4;
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 8px;
+  }
+  .PopUp-container-footer__button {
+    cursor: pointer;
+    padding: 10px 8px;
+    color: #5856d6;
+  }
+}

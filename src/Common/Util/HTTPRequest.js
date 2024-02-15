@@ -94,3 +94,9 @@ export const courseThumbnailUpload = (courseId) => {
     "GET"
   );
 };
+
+export const getLesson = (lessonId) => {
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER + `lesson/info?lessonId=${lessonId}`
+  );
+};
