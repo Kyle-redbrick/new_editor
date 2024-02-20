@@ -61,18 +61,12 @@ export const updateCourse = (courseId, courseValues) => {
   );
 };
 
-export const addLecture = () => {
-  const param = {
-    locale: "ko", // or "en","zh"
-    title: "test_lesson",
-    thumbnailURL: "",
-    description: "test",
-    language: "JS", // JS / OOBC / 3D / PYTHON
-    template: "",
-    totalMissionNumber: 0,
-    sampleGameURL: "",
-  };
-  return fetchSaasRequest(URL.API_SAAS_SERVER + `lesson`, "POST", param);
+export const updateLesson = (lessonId, lessonValues) => {
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER + `lesson?lessonId=${lessonId}`,
+    "PUT",
+    lessonValues
+  );
 };
 
 export const connectCourseAndLecture = ({ courseId, lessonId, order }) => {
@@ -95,8 +89,33 @@ export const courseThumbnailUpload = (courseId) => {
   );
 };
 
+export const lessonThumbnailUpload = (lessonId) => {
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER +
+      `lesson/thumbnail/upload?lessonId=${lessonId}&fileType=jpg&mimeType=image/jpeg`,
+    "GET"
+  );
+};
+
+export const thumbnailUpload = () => {
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER +
+      `lesson/thumbnail/upload?fileType=jpg&mimeType=image/jpeg`,
+    "GET"
+  );
+};
+
 export const getLesson = (lessonId) => {
   return fetchSaasRequest(
     URL.API_SAAS_SERVER + `lesson/info?lessonId=${lessonId}`
   );
+};
+
+export const addLesson = (param) => {
+  param.description = "";
+  param.sampleGameURL = "";
+  param.locale = "ko";
+  param.totalMissionNumber = 0;
+  param.template = "";
+  return fetchSaasRequest(URL.API_SAAS_SERVER + "lesson", "POST", param);
 };

@@ -7,12 +7,57 @@ import Mission from "./Component/Mission";
 import "./index.scss";
 
 export default function View(props) {
-  const { menuIndex, setMenuIndex } = props;
+  const {
+    lessonId,
+    menuIndex,
+    setMenuIndex,
+    lessonValues,
+    setTitle,
+    setLanguage,
+    setIsVisible,
+    setThumbnailURL,
+  } = props;
   const menuList = {
-    0: <Information />,
-    1: <Execution />,
-    2: <Introduce />,
-    3: <Mission />,
+    0: (
+      <Information
+        lessonId={lessonId}
+        lessonValues={lessonValues}
+        setTitle={setTitle}
+        setThumbnailURL={setThumbnailURL}
+        setIsVisible={setIsVisible}
+        setLanguage={setLanguage}
+      />
+    ),
+    1: (
+      <Execution
+        lessonId={lessonId}
+        lessonValues={lessonValues}
+        setTitle={setTitle}
+        setThumbnailURL={setThumbnailURL}
+        setIsVisible={setIsVisible}
+        setLanguage={setLanguage}
+      />
+    ),
+    2: (
+      <Introduce
+        lessonId={lessonId}
+        lessonValues={lessonValues}
+        setTitle={setTitle}
+        setThumbnailURL={setThumbnailURL}
+        setIsVisible={setIsVisible}
+        setLanguage={setLanguage}
+      />
+    ),
+    3: (
+      <Mission
+        lessonValues={lessonValues}
+        lessonId={lessonId}
+        setTitle={setTitle}
+        setThumbnailURL={setThumbnailURL}
+        setIsVisible={setIsVisible}
+        setLanguage={setLanguage}
+      />
+    ),
   };
   return (
     <>

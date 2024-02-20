@@ -97,6 +97,53 @@ function File(props) {
   );
 }
 
+function NewLessonFile(props) {
+  const { id, value, onChange } = props;
+  const fileInputRef = useRef();
+  // let downloadUrl;
+  return (
+    <Base {...props} type="file">
+      <input
+        type="file"
+        ref={fileInputRef}
+        accept=".jpg, .jpeg, .png, .gif, .mp4"
+        onChange={async (e) => {
+          const selectedFile = e.target.files[0];
+          if (!selectedFile) return;
+
+          const uploadResponse = await request.thumbnailUpload();
+          const uploadData = await uploadResponse.json();
+          const putUrl = uploadData.url.uploadUrl;
+          const downloadUrl = uploadData.url.downloadUrl;
+          const putResponse = await fetch(putUrl, {
+            method: "PUT",
+            headers: {
+              "Content-Type": "image/jpeg",
+            },
+            body: selectedFile,
+          });
+          console.log("PUT response", putResponse);
+          onChange(downloadUrl);
+        }}
+        hidden
+      />
+      {value && (
+        <span>
+          <img src={process.env.REACT_APP_GET_IMAGE + value} alt={value} />
+          {/* {value} */}
+        </span>
+      )}
+      <button
+        onClick={() => {
+          fileInputRef.current.click();
+        }}
+      >
+        업로드
+      </button>
+    </Base>
+  );
+}
+
 function OnOff(props) {
   const { id, value: isOn, onChange } = props;
 
@@ -119,11 +166,33 @@ function OnOff(props) {
   );
 }
 
+function Select(props) {
+  const { id, value, options, onChange } = props;
+  return (
+    <Base {...props} type="select">
+      <select
+        value={value}
+        onChange={(e) => {
+          onChange(e.currentTarget.value, id);
+        }}
+      >
+        {options.map((option, id) => (
+          <option key={id} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    </Base>
+  );
+}
+
 const Field = {
   Input,
   Textarea,
   File,
+  NewLessonFile,
   OnOff,
+  Select,
 };
 
 export default Field;

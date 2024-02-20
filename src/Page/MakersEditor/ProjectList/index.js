@@ -43,10 +43,17 @@ export default function ProjectList(props) {
       if (element) {
         const type = element.type;
         const id = element.id;
-        localStorage.setItem(
-          "makersEditorSelectedElement",
-          JSON.stringify({ type, id })
-        );
+        if (type === "addLesson") {
+          localStorage.setItem(
+            "makersEditorSelectedElement",
+            JSON.stringify({ type, id, courseId: element.courseId })
+          );
+        } else {
+          localStorage.setItem(
+            "makersEditorSelectedElement",
+            JSON.stringify({ type, id })
+          );
+        }
       }
     } else {
       localStorage.removeItem("makersEditorSelectedElement");
@@ -92,14 +99,13 @@ export default function ProjectList(props) {
       const courseElement = createElement("course", course);
       list.push(courseElement);
       if (courseElement.isFolded) continue;
-
       for (let lecture of course.courseLessonMappings || []) {
         const lectureElement = createElement("lecture", lecture);
         list.push(lectureElement);
       }
 
       const moreLecture = createElement("lecture", {
-        lesson: { id: 1, title: "레슨 추가" },
+        lesson: { id: 1, title: "레슨 추가", courseId: course.id },
       });
       list.push(moreLecture);
     }
@@ -142,6 +148,18 @@ export default function ProjectList(props) {
   const onClickElement = (element) => {
     if (element === selectedElement) {
       setSelectedElement(null);
+    } else if (
+      element.data &&
+      element.data.lesson &&
+      element.data.lesson.title &&
+      element.data.lesson.title === "레슨 추가"
+    ) {
+      setSelectedElement({
+        selectedElement: {
+          type: "addLesson",
+          courseId: element.data.lesson.courseId,
+        },
+      });
     } else {
       setSelectedElement({
         selectedElement: {
@@ -332,11 +350,7 @@ function Element(props) {
           style={{ display: "flex", alignItems: "center", marginRight: "4px" }}
           onClick={(e) => {
             e.stopPropagation();
-            if (title === "레슨 추가") {
-              alert("레슨 추가");
-            } else {
-              onClick(element);
-            }
+            onClick(element);
           }}
         >
           {title === "레슨 추가" && <img src={BtnLessonAdd} alt="lessonAdd" />}
