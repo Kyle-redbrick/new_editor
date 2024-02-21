@@ -47,6 +47,13 @@ export const deleteCourse = (param) => {
   );
 };
 
+export const deleteLesson = (param) => {
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER + `lesson/force?lessonId=${param}`,
+    "DELETE"
+  );
+};
+
 export const getCourseInfo = (courseId) => {
   return fetchSaasRequest(
     URL.API_SAAS_SERVER + `course/info?courseId=${courseId}`
@@ -113,9 +120,25 @@ export const getLesson = (lessonId) => {
 
 export const addLesson = (param) => {
   param.description = "";
-  param.sampleGameURL = "";
   param.locale = "ko";
   param.totalMissionNumber = 0;
   param.template = "";
   return fetchSaasRequest(URL.API_SAAS_SERVER + "lesson", "POST", param);
+};
+
+export const getSampleGameURL = (pId) => {
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER + `project/sampleGame/url?projectId=${pId}`
+  );
+};
+
+export const getProjectInfo = (pId) => {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER +
+      `project/info?projectId=${pId}&projectType=${
+        userInfo.role || "EDUCATOR"
+      }`,
+    "GET"
+  );
 };

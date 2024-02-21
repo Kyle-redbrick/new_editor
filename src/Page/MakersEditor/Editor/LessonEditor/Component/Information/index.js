@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import PopUp from "../../../../../../Common/Component/PopUp";
 import Field from "../../../Field";
 import "./index.scss";
 
@@ -10,7 +11,9 @@ export default function Information(props) {
     setLanguage,
     setIsVisible,
     lessonId,
+    deleteLessonHandler,
   } = props;
+  const [isDeletePopUp, setIsDeletePopUp] = useState(false);
 
   return (
     <div className="makersEditor-Editor-body-fields">
@@ -24,7 +27,7 @@ export default function Information(props) {
         />
       </div>
       <div className="makersEditor-Editor-body-fields__field">
-        <Field.File
+        <Field.LessonThumbnailFile
           type="file"
           title="썸네일"
           value={lessonValues.thumbnailURL || ""}
@@ -43,13 +46,27 @@ export default function Information(props) {
       <div className="makersEditor-Editor-body__horizontal" />
       <div
         className="makersEditor-Editor-body__delete"
-        // onClick={deleteCourseHandler}
+        onClick={() => {
+          setIsDeletePopUp(!isDeletePopUp);
+        }}
       >
         레슨 삭제
       </div>
-      {/* <div className="makersEditor-Editor-body-footer">
-    <button onClick={courseSaveHandler}>저장</button>
-  </div> */}
+      {isDeletePopUp && (
+        <div className="makersEditor-Editor-popup__delete">
+          <PopUp
+            button1="취소"
+            button2="삭제"
+            content={`삭제하면 되돌릴 수 없습니다.
+            정말 삭제하시겠습니까?`}
+            onClickButton1={() => setIsDeletePopUp(!isDeletePopUp)}
+            onClickButton2={() => {
+              deleteLessonHandler(lessonId);
+              setIsDeletePopUp(!isDeletePopUp);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

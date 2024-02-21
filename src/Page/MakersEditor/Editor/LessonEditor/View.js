@@ -16,10 +16,16 @@ export default function View(props) {
     setLanguage,
     setIsVisible,
     setThumbnailURL,
+    setProjectId,
+    setRunMethod,
+    setDifficulty,
+    setMissionTime,
+    deleteLessonHandler,
   } = props;
   const menuList = {
     0: (
       <Information
+        deleteLessonHandler={deleteLessonHandler}
         lessonId={lessonId}
         lessonValues={lessonValues}
         setTitle={setTitle}
@@ -32,10 +38,8 @@ export default function View(props) {
       <Execution
         lessonId={lessonId}
         lessonValues={lessonValues}
-        setTitle={setTitle}
-        setThumbnailURL={setThumbnailURL}
-        setIsVisible={setIsVisible}
-        setLanguage={setLanguage}
+        setProjectId={setProjectId}
+        setRunMethod={setRunMethod}
       />
     ),
     2: (
@@ -46,6 +50,8 @@ export default function View(props) {
         setThumbnailURL={setThumbnailURL}
         setIsVisible={setIsVisible}
         setLanguage={setLanguage}
+        setDifficulty={setDifficulty}
+        setMissionTime={setMissionTime}
       />
     ),
     3: (

@@ -1,0 +1,41 @@
+.makersEditor-Editor-body-Content-body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  .makersEditor-Editor-body-Content-body-projectId {
+    display: flex;
+    width: 100%;
+
+    .makersEditor-Editor-body-Content-body-projectId-fields {
+      flex: 0.55;
+    }
+
+    .makersEditor-Editor-body-Content-body-projectId__button {
+      display: flex;
+      align-items: flex-end;
+      margin-left: 8px;
+
+      button {
+        cursor: pointer;
+        color: #667085;
+        font-weight: 600;
+        border: 0px;
+        padding: 12px 16px;
+        justify-content: center;
+        border-radius: 16px;
+        height: 50px;
+        background: #e4e7ec;
+        line-height: normal;
+      }
+    }
+  }
+
+  .makersEditor-Editor-body-Content-body-runMethod {
+    //
+  }
+
+  .makersEditor-Editor-body-Content-body-sampleGame {
+    //
+  }
+}

@@ -9,6 +9,20 @@ export default function LessonEditor(props) {
   const [language, setLanguage] = useState("");
   const [thumbnailURL, setThumbnailURL] = useState("");
   const [isVisible, setIsVisible] = useState(true);
+  const [projectId, setProjectId] = useState("");
+  const [missionTime, setMissionTime] = useState(0);
+  const [difficulty, setDifficulty] = useState(0);
+  const [runMethod, setRunMethod] = useState("");
+
+  const deleteLessonHandler = (lessonId) => {
+    request
+      .deleteLesson(lessonId)
+      .then((res) => res.json())
+      .then(() => {
+        localStorage.removeItem("makersEditorSelectedElement");
+        window.location.reload();
+      });
+  };
 
   useEffect(() => {
     request
@@ -20,6 +34,10 @@ export default function LessonEditor(props) {
         setLanguage(lessonInfo.language);
         setThumbnailURL(lessonInfo.thumbnailURL);
         setIsVisible(lessonInfo.isVisible);
+        setProjectId(lessonInfo.projectId);
+        setRunMethod(lessonInfo.runMethod);
+        setMissionTime(lessonInfo.missionTime);
+        setDifficulty(lessonInfo.difficulty);
       });
   }, [lessonId, reload]);
 
@@ -29,8 +47,21 @@ export default function LessonEditor(props) {
       language: language,
       thumbnailURL: thumbnailURL,
       isVisible: isVisible,
+      projectId: projectId,
+      runMethod: runMethod,
+      missionTime: missionTime,
+      difficulty: difficulty,
     });
-  }, [title, language, thumbnailURL, isVisible]);
+  }, [
+    title,
+    language,
+    thumbnailURL,
+    isVisible,
+    projectId,
+    runMethod,
+    difficulty,
+    missionTime,
+  ]);
 
   return (
     <View
@@ -42,6 +73,11 @@ export default function LessonEditor(props) {
       setLanguage={setLanguage}
       menuIndex={menuIndex}
       setMenuIndex={setMenuIndex}
+      deleteLessonHandler={deleteLessonHandler}
+      setProjectId={setProjectId}
+      setRunMethod={setRunMethod}
+      setDifficulty={setDifficulty}
+      setMissionTime={setMissionTime}
     />
   );
 }

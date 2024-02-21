@@ -20,6 +20,13 @@
   cursor: pointer;
 }
 
+.makersEditor-Editor-popup__delete {
+  position: absolute;
+  z-index: 10;
+  bottom: 25px;
+  right: 0;
+}
+
 .makersEditor-Editor-body-footer {
   display: flex;
   flex-direction: row-reverse;

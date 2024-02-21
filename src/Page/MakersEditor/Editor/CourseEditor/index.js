@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Field from "../Field";
+import PopUp from "../../../../Common/Component/PopUp";
 import * as request from "../../../../Common/Util/HTTPRequest";
 import "./index.scss";
 
@@ -9,6 +10,7 @@ export default function CourseEditor(props) {
   const [description, setDescription] = useState("");
   const [thumbnailURL, setThumbnailURL] = useState("");
   const [isVisible, setIsVisible] = useState(true);
+  const [isDeletePopUp, setIsDeletePopUp] = useState(false);
   const deleteCourseHandler = () => {
     request
       .deleteCourse(courseId)
@@ -86,13 +88,26 @@ export default function CourseEditor(props) {
       <div className="makersEditor-Editor-body__horizontal" />
       <div
         className="makersEditor-Editor-body__delete"
-        onClick={deleteCourseHandler}
+        onClick={() => setIsDeletePopUp(!isDeletePopUp)}
       >
         코스 삭제
       </div>
-      {/* <div className="makersEditor-Editor-body-footer">
-        <button onClick={courseSaveHandler}>저장</button>
-      </div> */}
+
+      {isDeletePopUp && (
+        <div className="makersEditor-Editor-popup__delete">
+          <PopUp
+            button1="취소"
+            button2="삭제"
+            content={`삭제하면 되돌릴 수 없습니다.
+            정말 삭제하시겠습니까?`}
+            onClickButton1={() => setIsDeletePopUp(!isDeletePopUp)}
+            onClickButton2={() => {
+              deleteCourseHandler();
+              setIsDeletePopUp(!isDeletePopUp);
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }
