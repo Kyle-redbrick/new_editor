@@ -27,6 +27,15 @@ export default function Information(props) {
         />
       </div>
       <div className="makersEditor-Editor-body-fields__field">
+        <Field.Input
+          type="input"
+          title="언어"
+          disabled={true}
+          value={lessonValues.language || ""}
+          onChange={setLanguage}
+        />
+      </div>
+      <div className="makersEditor-Editor-body-fields__field">
         <Field.LessonThumbnailFile
           type="file"
           title="썸네일"

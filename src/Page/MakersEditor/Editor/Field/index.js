@@ -17,13 +17,22 @@ function Base(props) {
 }
 
 function Input(props) {
-  const { id, placeholder, value, onChange, children, type } = props;
+  const {
+    id,
+    placeholder,
+    value,
+    onChange,
+    children,
+    type,
+    disabled = false,
+  } = props;
   return (
     <Base {...props} type="input">
       <input
         type={type}
         placeholder={placeholder}
         value={value}
+        disabled={disabled}
         onChange={(e) => {
           onChange(e.currentTarget.value, id);
         }}
