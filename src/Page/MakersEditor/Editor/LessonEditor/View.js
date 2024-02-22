@@ -16,6 +16,7 @@ export default function View(props) {
     setLanguage,
     setIsVisible,
     setThumbnailURL,
+    setObjective,
     setProjectId,
     setRunMethod,
     setDifficulty,
@@ -55,6 +56,7 @@ export default function View(props) {
         setDifficulty={setDifficulty}
         setMissionTime={setMissionTime}
         setLessonTags={setLessonTags}
+        setObjective={setObjective}
         setLessonKeyCommands={setLessonKeyCommands}
       />
     ),

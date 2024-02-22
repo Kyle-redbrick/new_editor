@@ -61,6 +61,7 @@ export default function Editor(props) {
     delete lessonValues.lessonKeyCommands;
     request.updateLesson(lessonId, lessonValues).then((res) => {
       res.json();
+      setType("");
       setReload(!reload);
     });
   };

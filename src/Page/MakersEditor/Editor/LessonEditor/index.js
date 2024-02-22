@@ -14,6 +14,7 @@ export default function LessonEditor(props) {
   const [difficulty, setDifficulty] = useState(0);
   const [runMethod, setRunMethod] = useState("");
   const [lessonTags, setLessonTags] = useState("");
+  const [objective, setObjective] = useState([""]);
   const [lessonKeyCommands, setLessonKeyCommands] = useState("");
 
   const deleteLessonHandler = (lessonId) => {
@@ -40,6 +41,7 @@ export default function LessonEditor(props) {
         setRunMethod(lessonInfo.runMethod);
         setMissionTime(lessonInfo.missionTime);
         setDifficulty(lessonInfo.difficulty);
+        setObjective(JSON.parse(lessonInfo.objective));
         setLessonTags(lessonInfo.lessonTags);
         setLessonKeyCommands(lessonInfo.lessonKeyCommands);
       });
@@ -56,6 +58,7 @@ export default function LessonEditor(props) {
       missionTime: missionTime,
       difficulty: difficulty,
       lessonTags: lessonTags,
+      objective: objective,
       lessonKeyCommands: lessonKeyCommands,
     });
   }, [
@@ -68,6 +71,7 @@ export default function LessonEditor(props) {
     difficulty,
     missionTime,
     lessonTags,
+    objective,
     lessonKeyCommands,
   ]);
 
@@ -79,6 +83,7 @@ export default function LessonEditor(props) {
       setThumbnailURL={setThumbnailURL}
       setIsVisible={setIsVisible}
       setLanguage={setLanguage}
+      setObjective={setObjective}
       menuIndex={menuIndex}
       setMenuIndex={setMenuIndex}
       deleteLessonHandler={deleteLessonHandler}
