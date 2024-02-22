@@ -11,19 +11,21 @@ export default function Execution(props) {
   const { lessonValues, setProjectId, setRunMethod } = props;
 
   useEffect(() => {
-    request
-      .getProjectInfo(lessonValues.projectId)
-      .then((res) => res.json())
-      .then((json) => {
-        if (
-          json.data &&
-          json.data.projectInfo &&
-          json.data.projectInfo.sampleGameURL
-        ) {
-          setSampleGameURL(json.data.projectInfo.sampleGameURL);
-          setScreenMode(json.data.projectInfo.screenMode);
-        }
-      });
+    if (lessonValues.projectId) {
+      request
+        .getProjectInfo(lessonValues.projectId)
+        .then((res) => res.json())
+        .then((json) => {
+          if (
+            json.data &&
+            json.data.projectInfo &&
+            json.data.projectInfo.sampleGameURL
+          ) {
+            setSampleGameURL(json.data.projectInfo.sampleGameURL);
+            setScreenMode(json.data.projectInfo.screenMode);
+          }
+        });
+    }
   }, [sampleGameReload]);
 
   return (

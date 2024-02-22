@@ -42,6 +42,23 @@ export default function Editor(props) {
   };
 
   const lessonSaveHandler = () => {
+    if (typeof lessonValues.lessonKeyCommands === "string") {
+      const keyCommands = lessonValues.lessonKeyCommands
+        .split(",")
+        .map(function (keyCommand) {
+          return keyCommand.trim();
+        });
+      lessonValues.keyCommands = keyCommands;
+    }
+
+    if (typeof lessonValues.lessonTags === "string") {
+      const tags = lessonValues.lessonTags.split(",").map(function (tag) {
+        return tag.trim();
+      });
+      lessonValues.tags = tags;
+    }
+    delete lessonValues.lessonTags;
+    delete lessonValues.lessonKeyCommands;
     request.updateLesson(lessonId, lessonValues).then((res) => {
       res.json();
       setReload(!reload);

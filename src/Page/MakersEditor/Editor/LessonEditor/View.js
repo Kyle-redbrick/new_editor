@@ -21,6 +21,8 @@ export default function View(props) {
     setDifficulty,
     setMissionTime,
     deleteLessonHandler,
+    setLessonTags,
+    setLessonKeyCommands,
   } = props;
   const menuList = {
     0: (
@@ -52,6 +54,8 @@ export default function View(props) {
         setLanguage={setLanguage}
         setDifficulty={setDifficulty}
         setMissionTime={setMissionTime}
+        setLessonTags={setLessonTags}
+        setLessonKeyCommands={setLessonKeyCommands}
       />
     ),
     3: (

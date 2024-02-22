@@ -13,6 +13,8 @@ export default function LessonEditor(props) {
   const [missionTime, setMissionTime] = useState(0);
   const [difficulty, setDifficulty] = useState(0);
   const [runMethod, setRunMethod] = useState("");
+  const [lessonTags, setLessonTags] = useState("");
+  const [lessonKeyCommands, setLessonKeyCommands] = useState("");
 
   const deleteLessonHandler = (lessonId) => {
     request
@@ -38,6 +40,8 @@ export default function LessonEditor(props) {
         setRunMethod(lessonInfo.runMethod);
         setMissionTime(lessonInfo.missionTime);
         setDifficulty(lessonInfo.difficulty);
+        setLessonTags(lessonInfo.lessonTags);
+        setLessonKeyCommands(lessonInfo.lessonKeyCommands);
       });
   }, [lessonId, reload]);
 
@@ -51,6 +55,8 @@ export default function LessonEditor(props) {
       runMethod: runMethod,
       missionTime: missionTime,
       difficulty: difficulty,
+      lessonTags: lessonTags,
+      lessonKeyCommands: lessonKeyCommands,
     });
   }, [
     title,
@@ -61,6 +67,8 @@ export default function LessonEditor(props) {
     runMethod,
     difficulty,
     missionTime,
+    lessonTags,
+    lessonKeyCommands,
   ]);
 
   return (
@@ -78,6 +86,8 @@ export default function LessonEditor(props) {
       setRunMethod={setRunMethod}
       setDifficulty={setDifficulty}
       setMissionTime={setMissionTime}
+      setLessonTags={setLessonTags}
+      setLessonKeyCommands={setLessonKeyCommands}
     />
   );
 }
