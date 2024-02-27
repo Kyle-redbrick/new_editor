@@ -3,13 +3,16 @@ import CourseEditor from "./CourseEditor";
 import LessonEditor from "./LessonEditor";
 import PopUp from "../../../Common/Component/PopUp";
 import CreateLesson from "./CreateLesson";
+import CommandDictionary from "./CommandDictionary";
 import * as request from "../../../Common/Util/HTTPRequest";
 import "./index.scss";
 
 export default function Editor(props) {
   const { editorType, reload, setReload } = props;
+  const [menuIndex, setMenuIndex] = useState(0);
 
   const [type, setType] = useState("");
+  const [deletedIds, setDeletedIds] = useState([]);
   const [courseId, setCourseId] = useState("");
   const [lessonId, setLessonId] = useState("");
   const [courseValues, setCourseValues] = useState("");
@@ -18,6 +21,9 @@ export default function Editor(props) {
   const [courseSavePopUp, setCourseSavePopUp] = useState(false);
   const [lessonSavePopUp, setLessonSavePopUp] = useState(false);
   const [createLessonSavePopUp, setCreateLessonSavePopUp] = useState(false);
+  const [commandDictionarySavePopUp, setCommandDictionarySavePopUp] =
+    useState(false);
+  const [commandList, setCommandList] = useState([]);
 
   useEffect(() => {
     if (editorType && editorType.selectedElement) {
@@ -27,12 +33,40 @@ export default function Editor(props) {
         setCourseId(editorType.selectedElement.id);
       } else if (newType === "lecture") {
         setLessonId(editorType.selectedElement.id);
+      } else if (newType === "commandDictionary") {
+        setCourseId("");
+        setLessonId("");
       } else {
         setCourseId("");
         setLessonId("");
       }
     }
   }, [editorType]);
+
+  const commandDictionarySaveHandler = () => {
+    const newCommandList = commandList.map((command) => {
+      const newItem = {
+        commandName: command.commandName,
+        description: command.description,
+      };
+      if (command.id !== undefined) {
+        newItem.id = command.id;
+      }
+      return newItem;
+    });
+
+    request
+      .updateCommandList({
+        menuIndex,
+        params: { commandList: newCommandList, deletedIds },
+      })
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.commandName && json.commandName.length > 0) {
+          alert(`${json.commandName} 명령어가 중복되었습니다.`);
+        }
+      });
+  };
 
   const courseSaveHandler = () => {
     request.updateCourse(courseId, courseValues).then((res) => {
@@ -119,6 +153,9 @@ export default function Editor(props) {
         {type === "addLesson" && (
           <div className="makersEditor-Editor-header__title">레슨 생성하기</div>
         )}
+        {type === "commandDictionary" && (
+          <div className="makersEditor-Editor-header__title">명령어 사전</div>
+        )}
       </div>
       <div className="makersEditor-Editor-body">
         {type === "course" && (
@@ -146,6 +183,16 @@ export default function Editor(props) {
             setCreateLessonValues={setCreateLessonValues}
           />
         )}
+        {type === "commandDictionary" && (
+          <CommandDictionary
+            commandList={commandList}
+            setCommandList={setCommandList}
+            menuIndex={menuIndex}
+            setMenuIndex={setMenuIndex}
+            deletedIds={deletedIds}
+            setDeletedIds={setDeletedIds}
+          />
+        )}
       </div>
       <div className="makersEditor-Editor-footer">
         {type === "course" && (
@@ -163,6 +210,15 @@ export default function Editor(props) {
             onClick={() => setCreateLessonSavePopUp(!createLessonSavePopUp)}
           >
             레슨 생성
+          </button>
+        )}
+        {type === "commandDictionary" && (
+          <button
+            onClick={() =>
+              setCommandDictionarySavePopUp(!commandDictionarySavePopUp)
+            }
+          >
+            저장
           </button>
         )}
       </div>
@@ -210,6 +266,23 @@ export default function Editor(props) {
             onClickButton2={() => {
               createLessonSaveHandler({ goToModifyPage: true });
               setCreateLessonSavePopUp(!createLessonSavePopUp);
+            }}
+          />
+        </div>
+      )}
+      {commandDictionarySavePopUp && (
+        <div className="makersEditor-Editor-popup">
+          <PopUp
+            button1="취소"
+            button2="저장"
+            content={`저장하면 되돌릴 수 없습니다.
+            정말 수정사항을 저장하시겠습니까?`}
+            onClickButton1={() => {
+              setCommandDictionarySavePopUp(!commandDictionarySavePopUp);
+            }}
+            onClickButton2={() => {
+              commandDictionarySaveHandler();
+              setCommandDictionarySavePopUp(!commandDictionarySavePopUp);
             }}
           />
         </div>

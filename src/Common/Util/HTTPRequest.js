@@ -142,3 +142,19 @@ export const getProjectInfo = (pId) => {
     "GET"
   );
 };
+
+export const getCommandList = (menuIndex) => {
+  const language = menuIndex ? "JS" : "OOBC";
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER + `command/list?language=${language}`
+  );
+};
+
+export const updateCommandList = ({ menuIndex, params }) => {
+  const language = menuIndex ? "JS" : "OOBC";
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER + `command?language=${language}`,
+    "POST",
+    params
+  );
+};

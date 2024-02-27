@@ -1,5 +1,6 @@
 .makersEditor-Editor {
   display: flex;
+  width: 100%;
   // justify-content: space-between;
   flex-direction: column;
   height: 100%;
@@ -23,13 +24,14 @@
     padding: 32px 64px;
     padding-bottom: 0;
     flex: 1;
+    overflow-y: auto;
   }
 
   .makersEditor-Editor-footer {
     display: flex;
     flex-direction: row-reverse;
     border-top: 1px solid var(--Gray-200, #e4e7ec);
-    padding: 10px 0;
+    padding: 10px 15px 10px 0;
 
     > button {
       padding: 8px 32px;

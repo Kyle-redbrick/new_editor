@@ -262,7 +262,16 @@ export default function ProjectList(props) {
         />
       </div>
       <div className="makersEditor-ProjectList-dictionary">
-        <div className="makersEditor-ProjectList-dictionary-wrapper">
+        <div
+          className="makersEditor-ProjectList-dictionary-wrapper"
+          onClick={() => {
+            setSelectedElement({
+              selectedElement: {
+                type: "commandDictionary",
+              },
+            });
+          }}
+        >
           <p className="makersEditor-ProjectList-dictionary-wrapper__title">
             명령어 사전
           </p>
