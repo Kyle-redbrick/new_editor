@@ -158,3 +158,14 @@ export const updateCommandList = ({ menuIndex, params }) => {
     params
   );
 };
+
+export const getSaasDevelopingProject = (pId) => {
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER +
+      `project/info?projectId=${pId}&projectType=${
+        userInfo.role || "EDUCATOR"
+      }`,
+    "GET"
+  );
+};

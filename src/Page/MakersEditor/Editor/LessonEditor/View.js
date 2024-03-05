@@ -24,6 +24,11 @@ export default function View(props) {
     deleteLessonHandler,
     setLessonTags,
     setLessonKeyCommands,
+    template,
+    setTemplate,
+    totalMissionNum,
+    setTotalMissionNum,
+    defaultTemplate,
   } = props;
   const menuList = {
     0: (
@@ -62,12 +67,10 @@ export default function View(props) {
     ),
     3: (
       <Mission
+        defaultTemplate={defaultTemplate}
+        setTotalMissionNum={setTotalMissionNum}
+        setTemplate={setTemplate}
         lessonValues={lessonValues}
-        lessonId={lessonId}
-        setTitle={setTitle}
-        setThumbnailURL={setThumbnailURL}
-        setIsVisible={setIsVisible}
-        setLanguage={setLanguage}
       />
     ),
   };

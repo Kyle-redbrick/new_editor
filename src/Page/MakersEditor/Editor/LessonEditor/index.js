@@ -16,6 +16,9 @@ export default function LessonEditor(props) {
   const [lessonTags, setLessonTags] = useState("");
   const [objective, setObjective] = useState([""]);
   const [lessonKeyCommands, setLessonKeyCommands] = useState("");
+  const [template, setTemplate] = useState("");
+  const [totalMissionNum, setTotalMissionNum] = useState(0);
+  const [defaultTemplate, setDefaultTemplate] = useState("");
 
   const deleteLessonHandler = (lessonId) => {
     request
@@ -44,6 +47,9 @@ export default function LessonEditor(props) {
         setObjective(JSON.parse(lessonInfo.objective));
         setLessonTags(lessonInfo.lessonTags);
         setLessonKeyCommands(lessonInfo.lessonKeyCommands);
+        setTemplate(lessonInfo.template || "");
+        setDefaultTemplate(lessonInfo.template || "");
+        setTotalMissionNum(lessonInfo.totalMissionNumber || 0);
       });
   }, [lessonId, reload]);
 
@@ -60,6 +66,8 @@ export default function LessonEditor(props) {
       lessonTags: lessonTags,
       objective: objective,
       lessonKeyCommands: lessonKeyCommands,
+      template: template,
+      totalMissionNum: totalMissionNum,
     });
   }, [
     title,
@@ -73,6 +81,8 @@ export default function LessonEditor(props) {
     lessonTags,
     objective,
     lessonKeyCommands,
+    template,
+    totalMissionNum,
   ]);
 
   return (
@@ -93,6 +103,11 @@ export default function LessonEditor(props) {
       setMissionTime={setMissionTime}
       setLessonTags={setLessonTags}
       setLessonKeyCommands={setLessonKeyCommands}
+      template={template}
+      totalMissionNum={totalMissionNum}
+      setTemplate={setTemplate}
+      setTotalMissionNum={setTotalMissionNum}
+      defaultTemplate={defaultTemplate}
     />
   );
 }
