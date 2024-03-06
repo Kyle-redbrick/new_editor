@@ -148,7 +148,8 @@ export default function Mission(props) {
       .then((res) => res.json())
       .then((developingProject) =>
         setState(developingProject.data.projectInfo.state)
-      );
+      )
+      .catch(() => window.alert("유효하지 않은 프로젝트입니다."));
   };
 
   useEffect(() => {
@@ -186,6 +187,24 @@ export default function Mission(props) {
           >
             {`다음 >`}
           </p>
+          {isSelected && (
+            <div className="makersEditor-Editor-body-Content-menu-dropdown">
+              {missions.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`makersEditor-Editor-body-Content-menu-dropdown__steps${
+                    currentMissionIndex === idx ? " isSelected" : ""
+                  }`}
+                  onClick={() => {
+                    setCurrentMissionIndex(idx);
+                    setIsSelected(!isSelected);
+                  }}
+                >
+                  {idx + 1}단계
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="makersEditor-Editor-body-Content-menu-modify">
           <div
@@ -206,7 +225,7 @@ export default function Mission(props) {
         </div>
       </div>
       <div className="makersEditor-Editor-body-Content-state">
-        <div className="makersEditor-Editor-body-fields__field">
+        <div className="makersEditor-Editor-body-Content-state__part">
           <div>
             <Field.Input
               type="input"
@@ -217,18 +236,20 @@ export default function Mission(props) {
             />
           </div>
         </div>
-        <div className="makersEditor-Editor-body-fields__field">
+        <div className="makersEditor-Editor-body-Content-state__part">
           <div>
             <Field.Input
               type="input"
               title="미션 설명"
-              placeholder="미션 설명을 입력해주세요."
+              placeholder="미션 설명을 입력해주세요. <= BE data 추가해야할듯"
+              disabled={true}
+
               // value={title}
               // onChange={setTitle}
             />
           </div>
         </div>
-        <div className="makersEditor-Editor-body-fields__field">
+        <div className="makersEditor-Editor-body-Content-state__part">
           <div>
             <Field.Input
               type="input"
@@ -247,13 +268,14 @@ export default function Mission(props) {
             </button>
           </div>
         </div>
-        <div className="makersEditor-Editor-body-fields__field">
+        <div className="makersEditor-Editor-body-Content-state__part">
           <Field.Textarea
             type="textarea"
             title="템플릿 State"
             placeholder="템플릿 PID를 입력 후 프로젝트 불러오기를 눌러주세요."
             value={state}
             onChange={setState}
+            disabled={true}
           />
         </div>
       </div>

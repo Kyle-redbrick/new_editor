@@ -3,8 +3,15 @@ import * as request from "../../../../Common/Util/HTTPRequest";
 import View from "./View";
 
 export default function LessonEditor(props) {
-  const { lessonId, reload, setReload, lessonValues, setLessonValues } = props;
-  const [menuIndex, setMenuIndex] = useState(0);
+  const {
+    lessonId,
+    reload,
+    setReload,
+    lessonValues,
+    setLessonValues,
+    menuIndex,
+    setMenuIndex,
+  } = props;
   const [title, setTitle] = useState("");
   const [language, setLanguage] = useState("");
   const [thumbnailURL, setThumbnailURL] = useState("");

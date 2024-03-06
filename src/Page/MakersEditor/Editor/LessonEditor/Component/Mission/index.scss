@@ -7,9 +7,34 @@
 
   .makersEditor-Editor-body-Content-menu-arrows {
     display: flex;
+    position: relative;
     align-items: center;
     justify-content: center;
     gap: 32px;
+
+    .makersEditor-Editor-body-Content-menu-dropdown {
+      position: absolute;
+      border-radius: 8px;
+      width: 140px;
+      top: 55px;
+      padding: 8px;
+      background-color: #fff;
+      box-shadow: 0px 12px 24px 0px rgba(0, 0, 0, 0.2),
+        0px 3px 6px 0px rgba(0, 0, 0, 0.1);
+
+      .makersEditor-Editor-body-Content-menu-dropdown__steps {
+        padding: 10px 14px;
+        color: #667085;
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+
+        &.isSelected {
+          border-radius: 8px;
+          background-color: #f2f4f7;
+        }
+      }
+    }
 
     .makersEditor-Editor-body-Content-menu-arrows__dropdown {
       display: flex;

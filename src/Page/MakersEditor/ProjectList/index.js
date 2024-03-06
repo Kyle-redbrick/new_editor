@@ -11,7 +11,13 @@ export default function ProjectList(props) {
   const prevSelectedElementRef = useRef();
   const prevUnfoldedRef = useRef();
   const makersToken = localStorage.getItem("makersToken");
-  const { onChangeSelectedElement, reload, setReload } = props;
+  const {
+    onChangeSelectedElement,
+    reload,
+    setReload,
+    menuIndex,
+    setMenuIndex,
+  } = props;
   const [courses, setCourses] = useState([]);
   const [selectedElement, setSelectedElement] = useState(null);
   const [unfolded, setUnfolded] = useState({ courseIds: [] });
@@ -257,8 +263,8 @@ export default function ProjectList(props) {
           list={list()}
           onClickElement={onClickElement}
           onClickElementFold={onClickElementFold}
-          // onClickElementAdd={onClickElementAdd}
-          // onClickElementDelete={onClickElementDelete}
+          menuIndex={menuIndex}
+          setMenuIndex={setMenuIndex}
         />
       </div>
       <div className="makersEditor-ProjectList-dictionary">
@@ -289,6 +295,8 @@ function List(props) {
     onClickElementFold,
     onClickElementAdd,
     onClickElementDelete,
+    menuIndex,
+    setMenuIndex,
   } = props;
   return (
     <div className="makersEditor-ProjectList-body-list">
@@ -300,6 +308,8 @@ function List(props) {
           onClickFold={onClickElementFold}
           onClickAdd={onClickElementAdd}
           onClickDelete={onClickElementDelete}
+          menuIndex={menuIndex}
+          setMenuIndex={setMenuIndex}
         />
       ))}
     </div>
@@ -307,7 +317,15 @@ function List(props) {
 }
 
 function Element(props) {
-  const { element, onClick, onClickFold, onClickAdd, onClickDelete } = props;
+  const {
+    element,
+    onClick,
+    onClickFold,
+    onClickAdd,
+    onClickDelete,
+    menuIndex,
+    setMenuIndex,
+  } = props;
   const makersEditorUnfolded = JSON.parse(
     localStorage.getItem("makersEditorUnfolded")
   );
@@ -360,6 +378,7 @@ function Element(props) {
           onClick={(e) => {
             e.stopPropagation();
             onClick(element);
+            setMenuIndex(0);
           }}
         >
           {title === "레슨 추가" && <img src={BtnLessonAdd} alt="lessonAdd" />}

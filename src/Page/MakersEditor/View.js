@@ -6,6 +6,7 @@ import "./index.scss";
 function View(props) {
   const { editorType, onChangeSelectedElement } = props;
   const [reload, setReload] = useState(false);
+  const [menuIndex, setMenuIndex] = useState(0);
   return (
     <div className="makersEditor">
       <section>
@@ -13,6 +14,8 @@ function View(props) {
           onChangeSelectedElement={onChangeSelectedElement}
           reload={reload}
           setReload={setReload}
+          menuIndex={menuIndex}
+          setMenuIndex={setMenuIndex}
         />
       </section>
       <section>
@@ -21,6 +24,8 @@ function View(props) {
           onChangeSelectedElement={onChangeSelectedElement}
           reload={reload}
           setReload={setReload}
+          menuIndex={menuIndex}
+          setMenuIndex={setMenuIndex}
         />
       </section>
     </div>

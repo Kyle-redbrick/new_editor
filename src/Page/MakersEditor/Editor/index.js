@@ -8,8 +8,8 @@ import * as request from "../../../Common/Util/HTTPRequest";
 import "./index.scss";
 
 export default function Editor(props) {
-  const { editorType, reload, setReload } = props;
-  const [menuIndex, setMenuIndex] = useState(0);
+  const { editorType, reload, setReload, menuIndex, setMenuIndex } = props;
+  // const [menuIndex, setMenuIndex] = useState(0);
 
   const [type, setType] = useState("");
   const [deletedIds, setDeletedIds] = useState([]);
@@ -173,6 +173,8 @@ export default function Editor(props) {
             setReload={setReload}
             lessonValues={lessonValues}
             setLessonValues={setLessonValues}
+            menuIndex={menuIndex}
+            setMenuIndex={setMenuIndex}
           />
         )}
         {type === "addLesson" && (
