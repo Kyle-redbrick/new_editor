@@ -169,3 +169,17 @@ export const getSaasDevelopingProject = (pId) => {
     "GET"
   );
 };
+
+export const getCategories = () => {
+  return fetchSaasRequest(URL.API_SAAS_SERVER + "assetCategory/list", "GET");
+};
+
+export const assetsByCategory = (param) => {
+  return fetchSaasRequest(
+    URL.API_SAAS_SERVER + `asset/category/list?categoryId=${param.categoryId}`
+  );
+};
+
+export const getAssetsById = (param) => {
+  return fetchSaasRequest(URL.API_SAAS_SERVER + "asset/list" + param, "GET");
+};

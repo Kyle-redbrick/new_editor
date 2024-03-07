@@ -4,6 +4,7 @@ import ArrowUp from "../../../../../../Image/arrow_up.svg";
 import ArrowDown from "../../../../../../Image/arrow_down.svg";
 import DeleteIcon from "../../../../../../Image/btn-trash.svg";
 import PlusIcon from "../../../../../../Image/btn-plus.svg";
+import SlideField from "./SlideField";
 import * as request from "../../../../../../Common/Util/HTTPRequest";
 import "./index.scss";
 
@@ -276,6 +277,14 @@ export default function Mission(props) {
             value={state}
             onChange={setState}
             disabled={true}
+          />
+        </div>
+        <div className="makersEditor-Editor-body-Content-state__part">
+          <SlideField
+            id="slide"
+            title="슬라이드"
+            value={slide}
+            onChange={setSlide}
           />
         </div>
       </div>

@@ -259,6 +259,7 @@ const Field = {
   LessonThumbnailFile,
   OnOff,
   Select,
+  Base,
 };
 
 export default Field;
