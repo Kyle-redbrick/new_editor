@@ -1,0 +1,180 @@
+.oobceditor {
+  .oobceditor_constanteditor_container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+  }
+  .oobceditor_constanteditor_container-visible {
+    pointer-events: auto;
+  }
+
+  .oobceditor_constanteditor_overlay {
+    width: 100%;
+    height: 100%;
+    background-color: #0008;
+    opacity: 0;
+  }
+  .oobceditor_constanteditor_overlay-disabled {
+    pointer-events: none;
+  }
+  .oobceditor_constanteditor_container-visible
+    .oobceditor_constanteditor_overlay {
+    opacity: 1;
+    transition: opacity 0.2s;
+  }
+
+  .oobceditor_constanteditor {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    width: 360px;
+    color: white;
+    background-color: #2778ff;
+    border-radius: 12px;
+    overflow: hidden;
+    opacity: 0;
+  }
+  .oobceditor_constanteditor_container-visible .oobceditor_constanteditor {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  .oobceditor_constanteditor_inputs {
+    display: flex;
+    padding: 12px;
+  }
+  .oobceditor_constanteditor_input {
+    display: block;
+    padding: 0 12px;
+    width: 100%;
+    height: 42px;
+    text-align: right;
+    font-size: 24px;
+    font-family: "NotoSansJP-Bold";
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #000;
+    border-radius: 6px;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+  }
+  .oobceditor_constanteditor_input-blurred {
+    color: #999;
+  }
+  .oobceditor_constanteditor_input_wrapper {
+    display: flex;
+  }
+  .oobceditor_constanteditor_input_title {
+    margin: auto 0;
+    min-width: 24px;
+    font-weight: bold;
+  }
+  .oobceditor_constanteditor_input_wrapper:nth-of-type(2) {
+    margin-left: 12px;
+  }
+
+  .oobceditor_constanteditor_buttons {
+    display: flex;
+    padding: 0 12px 12px 12px;
+  }
+  .oobceditor_constanteditor_button {
+    width: 90px;
+    height: 42px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+  }
+  .oobceditor_constanteditor_button-clear {
+    background-color: #5293ff;
+    border-top: 1px solid #8db8ff;
+    box-shadow: 0px 1px #1b4893;
+  }
+  .oobceditor_constanteditor_button-cancel {
+    margin-left: auto;
+    background-color: #1b4893;
+    border-top: 1px solid #266bdf;
+    box-shadow: 0px 1px #13356e;
+  }
+  .oobceditor_constanteditor_button-confirm {
+    margin-left: 6px;
+    background-color: #ffc31e;
+    border-top: 1px solid #ffd667;
+    box-shadow: 0px 1px #d49b00;
+  }
+  .oobceditor_constanteditor_button-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .oobceditor_constanteditor_button-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .oobceditor_constanteditor_button-touched {
+    opacity: 0.5;
+  }
+
+  .oobceditor_constanteditor_keypad {
+    padding: 0 12px 6px 12px;
+  }
+  .oobceditor_constanteditor_numpads {
+    --numpadWidth: 42.8px;
+  }
+  .oobceditor_constanteditor_numpad {
+    display: inline-flex;
+    margin: 0 6px 6px 0;
+    width: var(--numpadWidth);
+    height: var(--numpadWidth);
+    font-size: 24px;
+    font-weight: bold;
+    background-color: #5293ff;
+    border-top: 1px solid #8db8ff;
+    border-radius: 6px;
+    box-shadow: 0px 1px #1b4893;
+    box-sizing: border-box;
+    vertical-align: top;
+    cursor: pointer;
+    user-select: none;
+  }
+  .oobceditor_constanteditor_numpad-touched {
+    opacity: 0.5;
+  }
+  .oobceditor_constanteditor_numpad-7 {
+    margin-right: 0;
+  }
+  .oobceditor_constanteditor_numpad-delete {
+    margin-right: 0;
+    width: calc(var(--numpadWidth) * 2 + 6px);
+  }
+  .oobceditor_constanteditor_numpad_title {
+    margin: auto;
+  }
+  .oobceditor_constanteditor_numpad_img {
+    margin: auto;
+    height: 60%;
+  }
+
+  .oobceditor_constanteditor--key {
+    top: 42%;
+    padding: 6px;
+    text-align: center;
+  }
+  .oobceditor_constanteditor_keymessage {
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #fff3;
+    border-style: dashed;
+    border-radius: 12px;
+  }
+}

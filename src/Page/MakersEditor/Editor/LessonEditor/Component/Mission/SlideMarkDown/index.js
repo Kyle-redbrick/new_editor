@@ -1,6 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import AssetLibrary from "../../../../../../../Common/Util/assetLibrary";
+import CodeRenderer from "./codeRenderer";
+import { htmlParserWith } from "./htmlParser";
 import "./index.scss";
 
 const SlideMarkDown = (props) => {
@@ -21,9 +24,21 @@ const SlideMarkDown = (props) => {
   }, []);
 
   return (
-    <div>
+    <div className="dreamslide" ref={props.slideRef}>
       {props.markdown ? (
-        <ReactMarkdown skipHtml={false}>{props.markdown}</ReactMarkdown>
+        <ReactMarkdown
+          skipHtml={false}
+          // rehypePlugins={[rehypeRaw]}  // 얘가 되는 것
+          rehypePlugins={[htmlParserWith]}
+          // rehypePlugins={[htmlParserWith({ getSpriteIcon: getSpriteIcon })]}
+          components={{
+            code: (props) => (
+              <CodeRenderer {...props} getSpriteIcon={getSpriteIcon} />
+            ),
+          }}
+        >
+          {props.markdown}
+        </ReactMarkdown>
       ) : (
         <div>슬라이드 내용이 없습니다.</div>
       )}

@@ -1,0 +1,73 @@
+.oobceditor {
+  .oobceditor_lines {
+    display: grid;
+    padding: 12px 0 66vh 0;
+    height: fit-content;
+  }
+  .oobceditor_line-end {
+    width: 100%;
+  }
+
+  .oobceditor_line {
+    display: flex;
+    padding: 6px 0 6px 18px;
+    height: var(--oobceditorBlockHeight);
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    transition: background-color 0.2s ease-out;
+    box-sizing: content-box;
+  }
+  .oobceditor_line-current {
+    border-top-color: #666666;
+    border-bottom-color: #666666;
+    background-color: #f5f5f555;
+  }
+  .oobceditor_line-disabled {
+    opacity: 0.25 !important;
+  }
+
+  .oobceditor_line_number {
+    margin: auto 3px;
+    width: 42px;
+    font-size: calc(var(--oobceditorBlockHeight) / 2);
+    text-align: right;
+    color: #fff;
+    opacity: 0.5;
+  }
+  .oobceditor_line-current .oobceditor_line_number {
+    opacity: 1;
+  }
+
+  .oobceditor_line_anchor {
+    margin: auto 3px;
+    width: calc(var(--oobceditorBlockHeight) * 2 / 3);
+    height: calc(var(--oobceditorBlockHeight) * 2 / 3);
+    user-select: initial !important;
+    -webkit-user-drag: initial !important;
+    cursor: pointer;
+  }
+  .oobceditor_line_anchor-hidden {
+    visibility: hidden;
+  }
+
+  .oobceditor_line_blocks {
+    display: flex;
+  }
+  .oobceditor_line_blocks-empty {
+    margin-left: 36px;
+  }
+
+  .oobceditor_line_fold {
+    margin: auto 0;
+    width: calc(var(--oobceditorBlockHeight) * 4 / 5);
+    height: calc(var(--oobceditorBlockHeight) * 4 / 5);
+    user-select: initial !important;
+    -webkit-user-drag: initial !important;
+    transform: rotate(90deg);
+    transition: 0.1s transform ease-out;
+    cursor: pointer;
+  }
+  .oobceditor_line_fold-folded {
+    transform: rotate(0deg);
+  }
+}

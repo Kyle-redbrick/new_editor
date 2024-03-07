@@ -1,0 +1,12 @@
+.oobceditor {
+  .oobceditor_context {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    box-sizing: border-box;
+  }
+  .oobceditor_context::-webkit-scrollbar {
+    display: none;
+  }
+}

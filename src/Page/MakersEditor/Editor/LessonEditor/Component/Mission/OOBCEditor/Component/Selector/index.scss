@@ -1,0 +1,99 @@
+.oobceditor_selector {
+  position: absolute;
+  margin: 0 12px;
+  pointer-events: none;
+}
+.oobceditor_selector-on {
+  transform: translateY(0);
+}
+.oobceditor_selector-off {
+  transform: translateY(100%);
+}
+
+.oobceditor_selector_categories {
+  display: flex;
+  padding: 0 18px;
+  height: var(--oobceditorSelectorCategoryHeight);
+  min-height: var(--oobceditorSelectorCategoryHeight);
+}
+.oobceditor_selector_category {
+  margin-right: 3px;
+  padding: 0 18px;
+  line-height: var(--oobceditorSelectorCategoryHeight);
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #1b4893;
+  border-top: 1px solid #3b73d0;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  pointer-events: auto;
+  cursor: pointer;
+}
+.oobceditor_selector_category-current {
+  background-color: #5091ff;
+  border-top: 1px solid #8fb9ff;
+}
+
+.oobceditor_selector_prototypes {
+  padding: 12px 12px 0 12px;
+  height: calc(100% - var(--oobceditorSelectorCategoryHeight));
+  background-color: #3d85ff;
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  box-sizing: border-box;
+  pointer-events: auto;
+}
+.oobceditor_selector_prototypes_inner {
+  padding: 12px 12px 0 12px;
+  width: 100%;
+  height: 100%;
+  background-color: #1b4893;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  overflow-y: scroll;
+  box-sizing: border-box;
+}
+.oobceditor_selector_prototypes_inner .oobceditor_block {
+  display: inline-flex;
+  vertical-align: top;
+  margin-bottom: 12px;
+}
+.oobceditor_selector_prototypes_inner::-webkit-scrollbar {
+  display: none;
+}
+
+
+.oobceditor_selector-float {
+  display: flex;
+  margin: 0;
+  border-radius: 12px;
+  box-shadow: 0px 0px 18px #0008;
+  overflow: hidden;
+
+  .oobceditor_selector_categories {
+    display: block;
+    padding: 0;
+    height: 100%;
+    background-color: #1b4893;
+  }
+  .oobceditor_selector_category {
+    margin: 0;
+    padding: 3px 12px;
+    border: none;
+    border-radius: 0;
+  }
+  .oobceditor_selector_category-current {
+    background-color: #3d85ff;
+  }
+
+  .oobceditor_selector_prototypes {
+    flex: 1;
+    height: 100%;
+    border-radius: 0;
+  }
+  .oobceditor_selector_prototypes_inner {
+    padding: 0;
+    background-color: transparent;
+  }
+}

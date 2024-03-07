@@ -1,0 +1,36 @@
+.oobceditor {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000a;
+  overflow: hidden;
+
+  --oobceditorSelectorCategoryHeight: 36px;
+  --oobceditorBlockHeight: 42px;
+
+  .oobceditor_contextmenus {
+    z-index: 10;
+  }
+  .oobceditor_selector {
+    z-index: 20;
+  }
+  .oobceditor_constanteditor_container {
+    z-index: 30;
+  }
+}
+
+.oobceditor-zoomLevel0 {
+  --oobceditorBlockHeight: 36px;
+}
+.oobceditor-zoomLevel1 {
+  --oobceditorBlockHeight: 39px;
+}
+.oobceditor-zoomLevel2 {
+  --oobceditorBlockHeight: 42px;
+}
+.oobceditor-zoomLevel3 {
+  --oobceditorBlockHeight: 45px;
+}
+.oobceditor-zoomLevel4 {
+  --oobceditorBlockHeight: 48px;
+}

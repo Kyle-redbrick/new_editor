@@ -1,0 +1,32 @@
+.oobceditor {
+  .oobceditor_utils {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    bottom: 24px;
+    right: 12px;
+    width: 42px;
+  }
+  .oobceditor_util {
+    flex-grow: 1;
+    margin-bottom: 6px;
+    color: #fff;
+    cursor: pointer;
+  }
+  .oobceditor_util:last-of-type {
+    margin-bottom: 0;
+  }
+  .oobceditor_util-disabled {
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  .oobceditor_util-zoom_in,
+  .oobceditor_util-zoom_out {
+    display: flex;
+    img {
+      margin: auto;
+      width: 90%;
+    }
+  }
+}
