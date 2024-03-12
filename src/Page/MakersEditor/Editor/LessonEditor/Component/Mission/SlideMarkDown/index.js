@@ -4,7 +4,14 @@ import rehypeRaw from "rehype-raw";
 import AssetLibrary from "../../../../../../../Common/Util/assetLibrary";
 import CodeRenderer from "./codeRenderer";
 import { htmlParserWith } from "./htmlParser";
+import {
+  addBaseToVideoSrc,
+  CustomVideo,
+  CustomImg,
+  CustomIcon,
+} from "./htmlParser2";
 import "./index.scss";
+import rehypeParse from "rehype-parse";
 
 const SlideMarkDown = (props) => {
   const getSpriteIcon = useCallback((spriteId) => {
@@ -27,14 +34,18 @@ const SlideMarkDown = (props) => {
     <div className="dreamslide" ref={props.slideRef}>
       {props.markdown ? (
         <ReactMarkdown
-          skipHtml={false}
+          // skipHtml={false}
           // rehypePlugins={[rehypeRaw]}  // 얘가 되는 것
-          rehypePlugins={[htmlParserWith]}
+          rehypePlugins={[rehypeRaw]}
+          // rehypePlugins={[htmlParserWith]}
           // rehypePlugins={[htmlParserWith({ getSpriteIcon: getSpriteIcon })]}
           components={{
             code: (props) => (
               <CodeRenderer {...props} getSpriteIcon={getSpriteIcon} />
             ),
+            video: CustomVideo,
+            icon: CustomIcon,
+            img: CustomImg,
           }}
         >
           {props.markdown}

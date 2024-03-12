@@ -5,8 +5,8 @@ import "./index.scss";
 
 const SlideField = (props) => {
   const [shouldRerender, setShouldRerender] = useState(false);
-  const editorId = useRef("slide_editor"); // ID는 고정값이므로 useRef 사용
-  const editorRef = useRef(null); // 에디터 인스턴스를 저장하기 위한 ref
+  const editorId = useRef("slide_editor");
+  const editorRef = useRef(null);
 
   useEffect(() => {
     setupEditor();
@@ -21,7 +21,7 @@ const SlideField = (props) => {
 
   const setupEditor = () => {
     editorRef.current = window.ace.edit(editorId.current, { wrap: true });
-    editorRef.current.setFontSize(18);
+    editorRef.current.setFontSize(16);
     editorRef.current.on("change", onChange);
   };
 
@@ -45,12 +45,13 @@ const SlideField = (props) => {
   };
 
   return (
-    // Type이 slide일 때 css 부여 필요
     <Field.Base {...props} type="slide">
       <div className="slide_viewer">
         <SlideMarkDown markdown={props.value} shouldRerender={shouldRerender} />
       </div>
-      <div id={editorId.current} className="slide_editor" />
+      <div className="slide_editor_wrapper">
+        <div id={editorId.current} className="slide_editor" />
+      </div>
     </Field.Base>
   );
 };

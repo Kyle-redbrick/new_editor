@@ -2,7 +2,10 @@ import React from "react";
 import HtmlToReact from "html-to-react";
 // import HtmlParser from "react-markdown/plugins/html-parser";
 import rehypeRaw from "rehype-raw";
-import rehypeReact from "rehype-react";
+import ReactMarkdown from "react-markdown";
+import { unified } from "unified";
+import rehypeParse from "rehype-parse";
+import { visit } from "unist-util-visit";
 
 // import AssetLibrary from "../../../Page/Builder/utils/assetLibrary";
 import OOBC from "../OOBCEditor/OOBC";
@@ -50,9 +53,6 @@ const getBlockProcessingInstruction = (options) => ({
   },
 });
 
-const iconSrcMap = {
-  play: playImg,
-};
 const iconProcessingInstruction = {
   shouldProcessNode: (node) => {
     return node.name === "icon";
@@ -120,15 +120,66 @@ const defaultProcessingIntructions = {
   processNode: processNodeDefinitions.processDefaultNode,
 };
 
-export const htmlParserWith = (options) => {
-  return rehypeRaw({
-    isValidNode: (node) => node.type !== "script",
-    processingInstructions: [
-      getBlockProcessingInstruction(options),
-      iconProcessingInstruction,
-      videoProcessingInstruction,
-      imgProcessingInstruction,
-      defaultProcessingIntructions,
-    ],
-  });
+export const CustomImg = ({ src, ...otherAttribs }) => {
+  const processedSrc =
+    src && src.startsWith("http")
+      ? `${src}`
+      : `${process.env.REACT_APP_GET_IMAGE}${src}`;
+  return (
+    <img
+      {...otherAttribs}
+      className="media_img"
+      src={processedSrc}
+      alt={otherAttribs.alt || "Image"}
+    />
+  );
+};
+
+export const CustomVideo = ({
+  src,
+  poster,
+  loop,
+  muted,
+  autoplay,
+  ...otherAttribs
+}) => {
+  const processedSrc =
+    src && src.startsWith("http")
+      ? `${src}`
+      : `${process.env.REACT_APP_GET_IMAGE}${src}`;
+  return (
+    <video
+      {...otherAttribs}
+      className="media_video"
+      src={processedSrc}
+      poster={poster && poster.GET_IMAGE()}
+      loop={loop === "true"}
+      muted={muted === "true"}
+      //   autoPlay={autoplay === "true"}
+      autoPlay={true}
+      controlsList="nodownload"
+      disablePictureInPicture
+      playsInline
+    />
+  );
+};
+
+const iconSrcMap = {
+  play: playImg,
+};
+
+export const CustomIcon = ({ type, ...otherAttribs }) => {
+  const src = iconSrcMap[type] || "";
+  if (otherAttribs && otherAttribs.children) {
+    return (
+      <>
+        <img className="inline_icon" src={src} alt={type} />
+        {otherAttribs.children}
+      </>
+    );
+  } else {
+    return (
+      <img {...otherAttribs} className="inline_icon" src={src} alt={type} />
+    );
+  }
 };

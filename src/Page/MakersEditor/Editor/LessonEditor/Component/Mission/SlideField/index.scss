@@ -1,0 +1,27 @@
+.makersEditor-Editor-body-fields__section-body__slide {
+  display: flex;
+  padding: 10px;
+  background-color: #e1e1e1;
+
+  .slide_viewer {
+    height: 800px;
+    border-radius: 6px;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+  .slide_editor_wrapper {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-left: 15px;
+    .slide_editor {
+      height: 800px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+}
