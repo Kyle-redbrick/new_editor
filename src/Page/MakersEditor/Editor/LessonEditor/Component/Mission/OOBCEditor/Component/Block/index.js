@@ -7,7 +7,7 @@ import "./index.scss";
 import editDefault from "../../Image/edit-default.svg";
 import editTouched from "../../Image/edit-touched.svg";
 
-export const BlockGroup = props => {
+export const BlockGroup = (props) => {
   const { block } = props;
   switch (block.type) {
     case CATEGORY.CALLBACK:
@@ -29,12 +29,12 @@ function getDefaultBlockGroup(props) {
     block,
     currentBlock,
     onClickBlock,
-    onClickConstantBlockEdit
+    onClickConstantBlockEdit,
   } = props;
   const blockElement = <Block {...props} />;
   const childsElement =
     block.children &&
-    block.children.map(child => (
+    block.children.map((child) => (
       <BlockGroup
         key={child.id}
         context={context}
@@ -57,7 +57,7 @@ function getOperatorBlockGroup(props) {
     block,
     currentBlock,
     onClickBlock,
-    onClickConstantBlockEdit
+    onClickConstantBlockEdit,
   } = props;
   const blockElement = <Block {...props} />;
   return (
@@ -86,7 +86,7 @@ function getLogicalNotBlockGroup(props) {
     block,
     currentBlock,
     onClickBlock,
-    onClickConstantBlockEdit
+    onClickConstantBlockEdit,
   } = props;
   const blockElement = <Block {...props} />;
   return (
@@ -103,39 +103,40 @@ function getLogicalNotBlockGroup(props) {
   );
 }
 
-export const Block = props => {
+export const Block = (props) => {
   const {
     context,
     block,
     currentBlock,
     disabled,
     onClickBlock,
-    onClickConstantBlockEdit
+    onClickConstantBlockEdit,
   } = props;
   const current = block === currentBlock;
   const blockClassName = getClassNameFor(block);
   const backgroundElement = getBackgroundElementOf(block);
   const contentsElement = getContentElementOf(block, context);
   const showEditElement = isEditable(block) && block === currentBlock;
+
   return (
     <div
       id={`oobceditor_block-${block.id}`}
       className={`oobceditor_block oobceditor_block-${block.state.toLowerCase()} oobceditor_block-${blockClassName}${
         current ? " oobceditor_block-current" : ""
       }${disabled ? " oobceditor_block-disabled" : ""}`}
-      onClick={e => {
+      onClick={(e) => {
         if (e.preventDefault) e.preventDefault();
         if (e.stopPropagation) e.stopPropagation();
         onClickBlock(block);
       }}
-      onContextMenu={e => {
+      onContextMenu={(e) => {
         if (e.preventDefault) e.preventDefault();
         if (e.stopPropagation) e.stopPropagation();
       }}
-      onTouchStart={e => {
+      onTouchStart={(e) => {
         e.target.classList.add("oobceditor_block-touched");
       }}
-      onTouchEnd={e => {
+      onTouchEnd={(e) => {
         e.target.classList.remove("oobceditor_block-touched");
       }}
     >
@@ -168,7 +169,7 @@ function getBackgroundElementOf(block) {
         <div
           className="oobceditor_block_background_img oobceditor_block_background_img-center"
           style={{
-            backgroundImage: `url(${require(`../../Image/BlockBackground/block_${backgroundSrcKey}-center.png`)})`
+            backgroundImage: `url(${require(`../../Image/BlockBackground/block_${backgroundSrcKey}-center.png`)})`,
           }}
         />
         <img
@@ -180,7 +181,9 @@ function getBackgroundElementOf(block) {
     );
   } else {
     const extension = backgroundSrcKey === "empty" ? "svg" : "png";
-    const backgroundImg = block.backgroundImg || require(`../../Image/BlockBackground/block_${backgroundSrcKey}.${extension}`);
+    const backgroundImg =
+      block.backgroundImg ||
+      require(`../../Image/BlockBackground/block_${backgroundSrcKey}.${extension}`);
     return (
       <div className="oobceditor_block_background">
         <img
@@ -213,7 +216,7 @@ function getBackgroundSrcKeyOf(block) {
       "onSignal",
       "onSwipe",
       "onShake",
-      "speak"
+      "speak",
     ];
     if (onActions.includes(block.data)) {
       backgroundSrcKey = "onAction";
@@ -229,7 +232,7 @@ function isStretchableBlock(block) {
     CATEGORY.CONSTANT,
     CATEGORY.VARIABLE,
     CATEGORY.UTIL,
-    CATEGORY.ACTION
+    CATEGORY.ACTION,
   ].includes(block.category);
 }
 
@@ -500,7 +503,7 @@ const zhAnimationNames = {
   victory: "胜利",
   walk: "走路",
   walk2: "走路2",
-  white: "白色"
+  white: "白色",
 };
 function getContentOfDirection(direction) {
   let directionName = direction.data;
@@ -527,7 +530,9 @@ function getContentOfDirection(direction) {
   );
 }
 function getContentOfKey(key) {
-  return <div className="oobceditor_block_contents_title">{key.data || "key"}</div>;
+  return (
+    <div className="oobceditor_block_contents_title">{key.data || "key"}</div>
+  );
 }
 function getContentOfPosition(position) {
   const { x, y } = position.data;
@@ -557,10 +562,10 @@ function getClassNameFor(block) {
 }
 function getGameObjectCopyId(gameObject) {
   const gameObjectName = gameObject.data;
-  const regexExp = /(?!\()-?\d+(?=\))/g
+  const regexExp = /(?!\()-?\d+(?=\))/g;
   const matches = gameObjectName.match(regexExp);
 
-  if(matches) {
+  if (matches) {
     return parseInt(matches[0]);
   } else {
     return null;
@@ -568,16 +573,19 @@ function getGameObjectCopyId(gameObject) {
 }
 
 function isEditable(block) {
-  return [BLOCK.NUMBERBLOCK, BLOCK.STRINGBLOCK, BLOCK.KEY, BLOCK.POSITION].includes(
-    block.type
-  );
+  return [
+    BLOCK.NUMBERBLOCK,
+    BLOCK.STRINGBLOCK,
+    BLOCK.KEY,
+    BLOCK.POSITION,
+  ].includes(block.type);
 }
 function EditElement(props) {
   const { block, onClickEdit } = props;
   return (
     <div
       className="oobceditor_block_edit"
-      onClick={e => {
+      onClick={(e) => {
         if (e.preventDefault) e.preventDefault();
         if (e.stopPropagation) e.stopPropagation();
         onClickEdit(block);
@@ -587,10 +595,10 @@ function EditElement(props) {
         className="oobceditor_block_edit_img"
         src={editDefault}
         alt="edit"
-        onTouchStart={e => {
+        onTouchStart={(e) => {
           e.target.src = editTouched;
         }}
-        onTouchEnd={e => {
+        onTouchEnd={(e) => {
           e.target.src = editDefault;
         }}
       />
@@ -598,10 +606,10 @@ function EditElement(props) {
   );
 }
 
-export const AddVarBlock = props => {
+export const AddVarBlock = (props) => {
   const block = new OOBC.Variable({
     state: OOBC.TYPE.STATE.PROTOTYPE,
-    data: "+"
+    data: "+",
   });
   return <Block block={block} onClickBlock={props.onClickBlock} />;
 };

@@ -9,6 +9,7 @@ import {
   CustomVideo,
   CustomImg,
   CustomIcon,
+  CustomOOBC,
 } from "./htmlParser2";
 import "./index.scss";
 import rehypeParse from "rehype-parse";
@@ -46,6 +47,7 @@ const SlideMarkDown = (props) => {
             video: CustomVideo,
             icon: CustomIcon,
             img: CustomImg,
+            oobc: CustomOOBC,
           }}
         >
           {props.markdown}

@@ -5,6 +5,7 @@ import ArrowDown from "../../../../../../Image/arrow_down.svg";
 import DeleteIcon from "../../../../../../Image/btn-trash.svg";
 import PlusIcon from "../../../../../../Image/btn-plus.svg";
 import SlideField from "./SlideField";
+import AssetLibrary from "../../../../../../Common/Util/assetLibrary";
 import * as request from "../../../../../../Common/Util/HTTPRequest";
 import "./index.scss";
 
@@ -132,16 +133,16 @@ export default function Mission(props) {
     }
   }, [title, pId, state, slide, conditions]);
 
-  // useEffect(() => {
-  //   if (state) {
-  //     try {
-  //       const parsedState = JSON.parse(state);
-  //       AssetLibrary.loadAssetsFromScene(parsedState.scene, () => {
-  //         props.setProject({ state: parsedState });
-  //       });
-  //     } catch (err) {}
-  //   }
-  // }, [state]);
+  useEffect(() => {
+    if (state) {
+      try {
+        const parsedState = JSON.parse(state);
+        AssetLibrary.loadAssetsFromScene(parsedState.scene, () => {
+          // props.setProject({ state: parsedState });
+        });
+      } catch (err) {}
+    }
+  }, [state]);
 
   const onClickLoadDevelopingProject = () => {
     request

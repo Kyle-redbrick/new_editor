@@ -16,12 +16,8 @@ const CodeRenderer = (props) => {
   const [isFolded, setIsFolded] = useState(true);
   const [isShow, setIsShow] = useState(true);
 
-  useEffect(() => {
-    // 여기에 componentDidMount 로직 추가
-  }, []);
-
   const onClickDrop = () => setIsFolded(!isFolded);
-  const onClickCopy = () => Clipboard.copy(props.value || "");
+  const onClickCopy = () => Clipboard.copy(props.children || "");
 
   const spriteId = props.node.meta;
   const id = spriteId + "_" + props.node.position.start.line;
@@ -46,7 +42,7 @@ const CodeRenderer = (props) => {
               id={id}
               isShow={isShow}
               language={props.language}
-              code={props.value || ""}
+              code={props.children || ""}
               getSpriteIcon={props.getSpriteIcon}
             />
           ) : (

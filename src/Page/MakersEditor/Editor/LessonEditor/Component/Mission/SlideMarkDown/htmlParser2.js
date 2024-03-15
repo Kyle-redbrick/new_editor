@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useCallback } from "react";
+import AssetLibrary from "../../../../../../../Common/Util/assetLibrary";
 import HtmlToReact from "html-to-react";
 // import HtmlParser from "react-markdown/plugins/html-parser";
 import rehypeRaw from "rehype-raw";
@@ -14,110 +15,51 @@ import { Block } from "../OOBCEditor/Component/Block";
 import playImg from "../../../../../../../Image/btn-play.svg";
 import emptyBlockImg from "../../../../../../../Image/slide_block_empty.svg";
 
-const getBlockProcessingInstruction = (options) => ({
-  shouldProcessNode: (node) => {
-    return node.name === "oobc";
-  },
-  processNode: (node) => {
-    const { getSpriteIcon } = options || {};
-    const { type, data, data2 } = node.attribs;
-    const block = OOBC.Block.fromJSON({
-      constructor: type,
-      state: OOBC.TYPE.STATE.PROTOTYPE,
-      data,
-    });
+export const CustomOOBC = ({ type, data, data2 }) => {
+  let block = OOBC.Block.fromJSON({
+    constructor: type,
+    data,
+    state: OOBC.TYPE.STATE.PROTOTYPE,
+  });
 
-    switch (type) {
-      case "Sprite":
-      case "Screen":
-        if (getSpriteIcon) {
-          block.thumbnailSrc = getSpriteIcon(data);
-        }
-        break;
-      case "Position":
-        block.data = { x: data, y: data2 };
-        break;
-      default:
-        break;
+  const getSpriteIcon = useCallback((spriteId) => {
+    if (!spriteId) return null;
+
+    let icon;
+
+    if (spriteId.startsWith("textbox")) {
+      icon = AssetLibrary.textboxThumb;
+    } else {
+      const name = spriteId.split("(")[0];
+      const asset = AssetLibrary.getAssetByName(name);
+      icon = asset && asset.thumb;
     }
 
-    if (block.type === "Block") {
-      block.backgroundImg = emptyBlockImg;
-    }
+    return icon;
+  }, []);
 
-    return (
-      <span className="inline_oobc">
-        <Block block={block} />
-      </span>
-    );
-  },
-});
+  switch (type) {
+    case "Sprite":
+    case "Screen":
+      block.thumbnailSrc = getSpriteIcon(data);
 
-const iconProcessingInstruction = {
-  shouldProcessNode: (node) => {
-    return node.name === "icon";
-  },
-  processNode: (node, children) => {
-    const { type } = node.attribs;
-    const src = iconSrcMap[type];
-    return <img className="inline_icon" src={src} alt={type} />;
-  },
-};
+      break;
+    case "Position":
+      block.data = { x: data, y: data2 };
+      break;
+    default:
+      break;
+  }
 
-const videoProcessingInstruction = {
-  shouldProcessNode: (node) => {
-    return node.name === "video";
-  },
-  // eslint-disable-next-line react/display-name
-  processNode: (node, children) => {
-    const { src, poster, loop, muted, autoplay, ...otherAttribs } =
-      node.attribs;
-    return (
-      <video
-        {...otherAttribs}
-        className="media_video"
-        src={src && src.GET_IMAGE()}
-        poster={poster && poster.GET_IMAGE()}
-        // src={src && src.toDreamclassS3URL()}
-        // poster={poster && poster.toDreamclassS3URL()}
-        loop={loop === "true" || false}
-        muted={muted === "true" || true}
-        autoPlay={autoplay === "true" || false}
-        controlsList="nodownload"
-        disablePictureInPicture
-        playsInline
-      />
-    );
-  },
-};
+  if (type === "Block") {
+    block.backgroundImg = emptyBlockImg;
+  }
 
-const imgProcessingInstruction = {
-  shouldProcessNode: (node) => {
-    return node.name === "img";
-  },
-  // eslint-disable-next-line react/display-name
-  processNode: (node, children) => {
-    let src = node.attribs.src;
-    if (src && !src.startsWith("http")) {
-      src = src.THUMBNAIL_ALI();
-      // src = src.toDreamclassS3URL();
-    }
-    return (
-      <img
-        {...node.attribs}
-        className="media_img"
-        src={src}
-        alt={node.attribs.src}
-      />
-    );
-  },
-};
-
-const processNodeDefinitions = new HtmlToReact.ProcessNodeDefinitions(React);
-
-const defaultProcessingIntructions = {
-  shouldProcessNode: () => true,
-  processNode: processNodeDefinitions.processDefaultNode,
+  return (
+    <span className="inline_oobc">
+      <Block block={block} />
+    </span>
+  );
 };
 
 export const CustomImg = ({ src, ...otherAttribs }) => {
