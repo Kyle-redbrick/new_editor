@@ -19,7 +19,7 @@ const CodeRenderer = (props) => {
   const onClickDrop = () => setIsFolded(!isFolded);
   const onClickCopy = () => Clipboard.copy(props.children || "");
 
-  const spriteId = props.node.meta;
+  const spriteId = props.node.meta || props.meta;
   const id = spriteId + "_" + props.node.position.start.line;
   const icon = props.getSpriteIcon ? props.getSpriteIcon(spriteId) : null;
 
@@ -106,7 +106,9 @@ function OOBCCode(props) {
   }
 }
 
-const DefaultCode = ({ id, code }) => {
+const DefaultCode = (props) => {
+  console.log("props :", props);
+  const { id, code } = props;
   const editorRef = useRef(null);
 
   useEffect(() => {

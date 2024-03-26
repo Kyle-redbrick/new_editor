@@ -54,18 +54,19 @@ export const Line = (props) => {
   const isCurrent = line === currentLine;
 
   const [{ opacity }, dragRef, previewRef] = useDrag({
+    type: "line",
     item: { type: "line", line },
-    collect: (monitor) => {
-      return {
-        opacity: monitor.isDragging() ? 0.5 : 1,
-      };
-    },
-    begin: (monitor) => {
-      onDragLineBegin(line);
-    },
-    end: (item, monitor) => {
-      onDragLineEnd(item.line);
-    },
+    // collect: (monitor) => {
+    //   return {
+    //     opacity: monitor.isDragging() ? 0.5 : 1,
+    //   };
+    // },
+    // begin: (monitor) => {
+    //   onDragLineBegin(line);
+    // },
+    // end: (item, monitor) => {
+    //   onDragLineEnd(item.line);
+    // },
   });
 
   const [, dropRef] = useDrop({
