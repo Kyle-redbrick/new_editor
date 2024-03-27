@@ -275,6 +275,7 @@ export default function Mission(props) {
             type="textarea"
             title="템플릿 State"
             placeholder="템플릿 PID를 입력 후 프로젝트 불러오기를 눌러주세요."
+            // value={JSON.stringify(state)}
             value={state}
             onChange={setState}
             disabled={true}
